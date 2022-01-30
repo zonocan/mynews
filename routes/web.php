@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//NewsController.phpへのアクセス
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('news/create', 'Admin\NewsController@add');
+});
+
+
+
+//ProfileController.phpへのアクセス
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('news/create', 'Admin\ProfileController@add');
+});
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('news/create', 'Admin\ProfileController@edit');
+});
