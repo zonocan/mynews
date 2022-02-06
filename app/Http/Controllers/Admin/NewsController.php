@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+// 以下を追記することでNews Modelが扱えるようになる
 use App\News;
 
 class NewsController extends Controller
@@ -41,20 +42,4 @@ class NewsController extends Controller
 
       return redirect('admin/news/create');
   }
-  
-
-  // 以下を追記
-  public function index(Request $request)
-  {
-      $cond_title = $request->cond_title;
-      if ($cond_title != '') {
-          // 検索されたら検索結果を取得する
-          $posts = News::where('title', $cond_title)->get();
-      } else {
-          // それ以外はすべてのニュースを取得する
-          $posts = News::all();
-      }
-      return view('admin.news.index', ['posts' => $posts, 'cond_title' => $cond_title]);
-  }
-  
 }
