@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 //NewsController.phpへのアクセス
-
 Route::group(['prefix' => 'admin'], function() {
     Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
 });
@@ -38,8 +37,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 //プロフィールの新規作成のルート
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-     Route::get('profile/edit', 'Admin\NewsController@update');
-     Route::post('profile/create', 'Admin\NewsController@create'); 
+     Route::get('profile/edit', 'Admin\ProfileController@update');
+     Route::post('profile/create', 'Admin\ProfileController@create'); 
 });
 
 Route::group(['prefix' => 'admin'], function() {
