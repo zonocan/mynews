@@ -68,6 +68,7 @@ class NewsController extends Controller
         abort(404);    
       }
       return view('admin.news.edit', ['news_form' => $news]);
+
   }
 
 
@@ -101,7 +102,6 @@ class NewsController extends Controller
       $history->news_id = $news->id;
       $history->edited_at = Carbon::now();
       $history->save();
-
       return redirect('admin/news/');      
   }
   

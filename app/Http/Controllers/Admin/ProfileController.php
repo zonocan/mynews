@@ -9,12 +9,13 @@ class ProfileController extends Controller
     
         public function add()
     {
+        var_dump('add()');
         return view('admin.profile.create');
     }
 
     public function create(Request $request)
     {
-        
+      var_dump($request);
       $this->validate($request, Profile::$rules);
       $profils = new Profile;
       $form = $request->all();
@@ -32,7 +33,7 @@ class ProfileController extends Controller
 
     public function edit(Request $request)
     {
-        $profils = Profile::file($request->id);
+        $profils = Profile::find($request->id);
         if (empty($profils)) {
             abort(404);
         }
