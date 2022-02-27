@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\ProfileHistory;
+use Carbon\Carbon;
 class ProfileController extends Controller
 {
     
         public function add()
     {
-        var_dump('add()');
+        //var_dump('add()');
         return view('admin.profile.create');
     }
 
     public function create(Request $request)
     {
-      var_dump($request);
+      //var_dump($request);
       $this->validate($request, Profile::$rules);
       $profils = new Profile;
       $form = $request->all();
@@ -49,7 +51,17 @@ class ProfileController extends Controller
         
         $profils->fill($profils_form)->save();
         return redirect('admin/profile/edit');
+
+        //プロフィールの更新履歴
+        $profilehistory = new History();
+        $profilehistory->profile_id = $profils->id;
+        $profilehistory->edited_at = Carbon::now();
+        $profilehistory->save();
+        
+        return redirect('admin/profile/edit');
+        
     }
     
+
     
 }
